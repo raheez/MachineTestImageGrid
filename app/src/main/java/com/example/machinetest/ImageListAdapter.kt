@@ -18,7 +18,6 @@ import com.bumptech.glide.Glide
 import com.example.machinetest.databinding.AdapterImageListItemBinding
 import com.example.machinetest.model.ImageListModel
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ImageListAdapter(
     private val context: Context?,
@@ -26,9 +25,6 @@ class ImageListAdapter(
     private var imageClickInterface: ImageClickInterface,
 ) :
     RecyclerView.Adapter<ImageListAdapter.ImageViewHolder>(), Filterable {
-
-
-    private var stringLogo: String? = null
     var strSearchQuery = ""
     var defaultList: ArrayList<ImageListModel> = arrayListImages as ArrayList<ImageListModel>
 
@@ -42,7 +38,7 @@ class ImageListAdapter(
 
         var stringTitle: String? = null
         if (arrayListImages.isNotEmpty() == true) {
-            stringTitle = arrayListImages[position].name.lowercase()?:""
+            stringTitle = arrayListImages[position].name.lowercase()
             holder.mBinding?.title?.text = stringTitle
             holder.mBinding?.imageView?.let {
                 Glide.with(context!!).load(arrayListImages[position].image).centerCrop().into(it)
@@ -51,16 +47,26 @@ class ImageListAdapter(
         }
 
 
-
         var spannableStringBuilder = SpannableStringBuilder(stringTitle)
         if (strSearchQuery.isNotEmpty()) {
             var index = stringTitle?.lowercase(Locale.ROOT)?.indexOf(strSearchQuery)!!
             while (index > -1) {
                 spannableStringBuilder = SpannableStringBuilder(stringTitle)
-                val foregroundColorSpan = ForegroundColorSpan(context?.resources?.getColor(R.color.purple_200)!!) //specify color here
+                val foregroundColorSpan =
+                    ForegroundColorSpan(context?.resources?.getColor(R.color.highlight_red)!!) //specify color here
                 val styleSpan = StyleSpan(Typeface.BOLD)
-                spannableStringBuilder.setSpan(styleSpan, index, (index + strSearchQuery.length), Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-                spannableStringBuilder.setSpan(foregroundColorSpan, index, (index + strSearchQuery.length), Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+                spannableStringBuilder.setSpan(
+                    styleSpan,
+                    index,
+                    (index + strSearchQuery.length),
+                    Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                )
+                spannableStringBuilder.setSpan(
+                    foregroundColorSpan,
+                    index,
+                    (index + strSearchQuery.length),
+                    Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                )
                 index = stringTitle.indexOf(strSearchQuery, index + 1)
 
             }
@@ -69,8 +75,6 @@ class ImageListAdapter(
             holder.mBinding?.title?.text = spannableStringBuilder
 
         } else {
-            //setFadeAnimation(holder.mLayout)
-
             holder.mBinding?.title?.text = Html.fromHtml(stringTitle)
         }
 
@@ -84,15 +88,15 @@ class ImageListAdapter(
     }
 
 
-    inner class ImageViewHolder(val mBinding: AdapterImageListItemBinding?) : RecyclerView.ViewHolder(mBinding?.root!!) {
-
+    inner class ImageViewHolder(val mBinding: AdapterImageListItemBinding?) :
+        RecyclerView.ViewHolder(mBinding?.root!!) {
     }
 
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charString: String = constraint as String
-                strSearchQuery = charString.lowercase()?:""
+                strSearchQuery = charString.lowercase()
                 arrayListImages = if (constraint.isEmpty()) {
                     defaultList
                 } else {

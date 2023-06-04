@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="search_edit_text_margin_left">16dp</dimen>
+    <dimen name="search_edit_text_padding_top">16dp</dimen>
+    <dimen name="search_edit_text_padding_bottom">20dp</dimen>
+    <dimen name="search_bar_text_size">16dp</dimen>
+    <dimen name="search_image_view_close_margin_right">16dp</dimen>
+    <dimen name="search_image_view_close_padding">8dp</dimen>
+    <dimen name="recycler_view_padding_top">16dp</dimen>
+</resources>

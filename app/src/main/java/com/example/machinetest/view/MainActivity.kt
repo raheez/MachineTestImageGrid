@@ -1,9 +1,11 @@
 package com.example.machinetest.view
 
+import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
-import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.machinetest.ImageClickInterface
 import com.example.machinetest.ImageListAdapter
@@ -24,6 +26,20 @@ class MainActivity : AppCompatActivity(), ImageClickInterface {
 
         setOrientation()
         setRecyclerView()
+        initialiseListeners()
+    }
+
+    private fun initialiseListeners() {
+        mainBinding.editTextSearch.doAfterTextChanged {
+            val strChar = it.toString()
+            adapter.filter.filter(strChar.lowercase())
+            adapter.notifyDataSetChanged()
+        }
+
+        mainBinding.searchImageViewClose.setOnClickListener {
+            mainBinding.editTextSearch.setText("")
+            adapter.notifyDataSetChanged()
+        }
     }
 
     private fun setOrientation() {

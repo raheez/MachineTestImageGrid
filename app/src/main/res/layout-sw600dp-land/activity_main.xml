@@ -7,17 +7,75 @@
     tools:context=".view.MainActivity">
 
 
+    <RelativeLayout
+        android:id="@+id/search_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/search_edittext_bg_color"
+        >
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:ellipsize="end"
+            android:hint="search "
+            android:imeOptions="actionDone"
+            android:lines="1"
+            android:maxEms="6"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/search_edit_text_margin_left"
+            android:paddingTop="@dimen/search_edit_text_padding_top"
+            android:paddingRight="@dimen/search_edit_text_margin_left"
+            android:paddingBottom="@dimen/search_edit_text_padding_bottom"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/search_bar_text_size"
+
+            />
+
+
+        <ImageView
+            android:id="@+id/searchImageViewClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/search_image_view_close_margin_right"
+            android:layout_marginRight="@dimen/search_image_view_close_margin_right"
+            android:padding="@dimen/search_image_view_close_padding"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:src="@drawable/close_ic"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="Hello World!"
+        android:visibility="visible"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_container"
+        app:spanCount="@integer/span_count"
         tools:itemCount="20"
-        tools:listitem="@layout/adapter_image_list_item" />
+        tools:listitem="@layout/adapter_image_list_item"
+        android:paddingTop="@dimen/recycler_view_padding_top"
+
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
