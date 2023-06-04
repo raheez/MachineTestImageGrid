@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.machinetest.R
 import com.example.machinetest.databinding.ActivityMainBinding
@@ -58,7 +57,7 @@ class MainActivity : AppCompatActivity(), ImageClickInterface {
 
     private fun setRecyclerView() {
         val spanCount = resources.getInteger(R.integer.span_count)
-        viewModel.imageListLiveData.observe(this, Observer {
+        viewModel.imageListLiveData.observe(this) {
             if (it.isNotEmpty()) {
                 adapter = ImageListAdapter(this, it, this)
                 gridLayoutManager = GridLayoutManager(this, spanCount)
@@ -66,7 +65,7 @@ class MainActivity : AppCompatActivity(), ImageClickInterface {
                 mainBinding.recyclerView.adapter = adapter
                 initialiseListeners()
             }
-        })
+        }
     }
 
     /**
@@ -74,7 +73,7 @@ class MainActivity : AppCompatActivity(), ImageClickInterface {
      *
      */
     override fun onImageClick(image: Int) {
-        val intent = Intent(this, ImagePreviewActivity::class.java).apply {
+        Intent(this, ImagePreviewActivity::class.java).apply {
             putExtra("SELECTED_IMAGE", image)
             startActivity(this)
         }

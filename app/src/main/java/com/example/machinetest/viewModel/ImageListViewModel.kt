@@ -38,7 +38,7 @@ class ImageListViewModel : ViewModel() {
         listOfImages.add(ImageListModel(R.drawable.water_lily,"water lily"))
         listOfImages.add(ImageListModel(R.drawable.white_bird,"white bird"))
         listOfImages.add(ImageListModel(R.drawable.zebra,"zebra"))
-        _imageListMutableLiveData.postValue(listOfImages);
+        _imageListMutableLiveData.postValue(listOfImages)
     }
 
 

@@ -1,11 +1,9 @@
 package com.example.machinetest.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.example.machinetest.R
 import com.example.machinetest.databinding.ActivityImagePreviewBinding
-import com.example.machinetest.databinding.ActivityMainBinding
 
 class ImagePreviewActivity : AppCompatActivity() {
 
