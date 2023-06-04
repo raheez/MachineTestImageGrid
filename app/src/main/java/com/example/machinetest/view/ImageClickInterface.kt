@@ -1,4 +1,4 @@
-package com.example.machinetest
+package com.example.machinetest.view
 
 interface ImageClickInterface {
 

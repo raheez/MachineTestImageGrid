@@ -1,4 +1,4 @@
-package com.example.machinetest
+package com.example.machinetest.view
 
 
 import android.annotation.SuppressLint
@@ -15,6 +15,7 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.machinetest.R
 import com.example.machinetest.databinding.AdapterImageListItemBinding
 import com.example.machinetest.model.ImageListModel
 import java.util.*

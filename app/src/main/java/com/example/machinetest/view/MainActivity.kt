@@ -3,26 +3,25 @@ package com.example.machinetest.view
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.machinetest.ImageClickInterface
-import com.example.machinetest.ImageListAdapter
 import com.example.machinetest.R
 import com.example.machinetest.databinding.ActivityMainBinding
-import com.example.machinetest.model.ImageListModel
 import com.example.machinetest.viewModel.ImageListViewModel
 
 class MainActivity : AppCompatActivity(), ImageClickInterface {
+
+    //region declaration
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var gridLayoutManager: GridLayoutManager
-    private var listOfImages = mutableListOf<ImageListModel>()
     private lateinit var adapter: ImageListAdapter
     private val viewModel by viewModels<ImageListViewModel>()
+    //endregion
 
+    //region lifecycle-methods
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -30,7 +29,9 @@ class MainActivity : AppCompatActivity(), ImageClickInterface {
         setOrientation()
         setRecyclerView()
     }
+    //endregion
 
+    //region methods
     private fun initialiseListeners() {
         mainBinding.editTextSearch.doAfterTextChanged {
             val strChar = it.toString()
@@ -44,8 +45,11 @@ class MainActivity : AppCompatActivity(), ImageClickInterface {
         }
     }
 
+    /**
+     *  for tablet device support both portrait and landscape
+     *  for mobile only portrait
+     */
     private fun setOrientation() {
-        //for tablet device support both portrait and landscape
         val isTablet = resources.getBoolean(R.bool.isTablet)
         if (!isTablet) {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -53,7 +57,6 @@ class MainActivity : AppCompatActivity(), ImageClickInterface {
     }
 
     private fun setRecyclerView() {
-
         val spanCount = resources.getInteger(R.integer.span_count)
         viewModel.items.observe(this, Observer {
             if (it.isNotEmpty()) {
@@ -66,11 +69,15 @@ class MainActivity : AppCompatActivity(), ImageClickInterface {
         })
     }
 
+    /**
+     *  send the selected image to next screen for previewing
+     *
+     */
     override fun onImageClick(image: Int) {
         val intent = Intent(this, ImagePreviewActivity::class.java).apply {
             putExtra("SELECTED_IMAGE", image)
             startActivity(this)
         }
     }
-
+    //endregion
 }
