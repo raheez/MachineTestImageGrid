@@ -1,6 +1,5 @@
 package com.example.machinetest.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,9 +8,9 @@ import com.example.machinetest.model.ImageListModel
 
 class ImageListViewModel : ViewModel() {
 
-    private var _items: MutableLiveData<List<ImageListModel>> = MutableLiveData(listOf())
+    private var _imageListMutableLiveData: MutableLiveData<List<ImageListModel>> = MutableLiveData(listOf())
 
-    val items: LiveData<List<ImageListModel>> = _items
+    val imageListLiveData: LiveData<List<ImageListModel>> = _imageListMutableLiveData
 
     init {
         createImageList()
@@ -19,7 +18,6 @@ class ImageListViewModel : ViewModel() {
 
     private fun createImageList() {
 
-        //test logic
         val listOfImages = mutableListOf<ImageListModel>()
         listOfImages.clear()
         listOfImages.add(ImageListModel(R.drawable.bird,"bird"))
@@ -40,7 +38,7 @@ class ImageListViewModel : ViewModel() {
         listOfImages.add(ImageListModel(R.drawable.water_lily,"water lily"))
         listOfImages.add(ImageListModel(R.drawable.white_bird,"white bird"))
         listOfImages.add(ImageListModel(R.drawable.zebra,"zebra"))
-        _items.postValue(listOfImages);
+        _imageListMutableLiveData.postValue(listOfImages);
     }
 
 

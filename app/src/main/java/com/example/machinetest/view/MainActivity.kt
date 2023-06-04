@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity(), ImageClickInterface {
 
     private fun setRecyclerView() {
         val spanCount = resources.getInteger(R.integer.span_count)
-        viewModel.items.observe(this, Observer {
+        viewModel.imageListLiveData.observe(this, Observer {
             if (it.isNotEmpty()) {
                 adapter = ImageListAdapter(this, it, this)
                 gridLayoutManager = GridLayoutManager(this, spanCount)
