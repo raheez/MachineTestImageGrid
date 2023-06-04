@@ -93,6 +93,9 @@ class ImageListAdapter(
         RecyclerView.ViewHolder(mBinding?.root!!) {
     }
 
+    /**
+     * filter used for searching images by name.
+     */
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
