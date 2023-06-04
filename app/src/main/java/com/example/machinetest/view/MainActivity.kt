@@ -1,5 +1,6 @@
 package com.example.machinetest.view
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
@@ -66,7 +67,10 @@ class MainActivity : AppCompatActivity(), ImageClickInterface {
     }
 
     override fun onImageClick(image: Int) {
-
+        val intent = Intent(this, ImagePreviewActivity::class.java).apply {
+            putExtra("SELECTED_IMAGE", image)
+            startActivity(this)
+        }
     }
 
 }
