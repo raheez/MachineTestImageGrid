@@ -21,7 +21,7 @@ import java.util.*
 
 class ImageListAdapter(
     private val context: Context?,
-    private var arrayListImages: MutableList<ImageListModel>,
+    private var arrayListImages:List<ImageListModel>,
     private var imageClickInterface: ImageClickInterface,
 ) :
     RecyclerView.Adapter<ImageListAdapter.ImageViewHolder>(), Filterable {
@@ -37,7 +37,7 @@ class ImageListAdapter(
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
 
         var stringTitle: String? = null
-        if (arrayListImages.isNotEmpty() == true) {
+        if (arrayListImages.isNotEmpty()) {
             stringTitle = arrayListImages[position].name.lowercase()
             holder.mBinding?.title?.text = stringTitle
             holder.mBinding?.imageView?.let {
@@ -49,7 +49,7 @@ class ImageListAdapter(
 
         var spannableStringBuilder = SpannableStringBuilder(stringTitle)
         if (strSearchQuery.isNotEmpty()) {
-            var index = stringTitle?.lowercase(Locale.ROOT)?.indexOf(strSearchQuery)!!
+            var index = stringTitle?.lowercase()?.indexOf(strSearchQuery)!!
             while (index > -1) {
                 spannableStringBuilder = SpannableStringBuilder(stringTitle)
                 val foregroundColorSpan =
