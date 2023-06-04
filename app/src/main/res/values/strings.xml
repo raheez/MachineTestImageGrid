@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MachineTest</string>
+    <string name="orientation_device">portrait</string>
+</resources>
